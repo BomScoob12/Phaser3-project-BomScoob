@@ -38,6 +38,7 @@ class GameScene extends Phaser.Scene {
 
     this.player = this.physics.add.sprite(700, 350, 'goose')
 
+    // create animations
     this.anims.create({
       key: 'player-walk', // ชื่ออนิเมชั่น
       frames: this.anims.generateFrameNumbers('goose', {
