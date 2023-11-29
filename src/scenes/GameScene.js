@@ -29,6 +29,7 @@ class GameScene extends Phaser.Scene {
     )
 
     this.load.image('logs', 'assets/image/game-scene/components/logs.png')
+    this.load.image('platform', 'assets/image/game-scene/platforms/ground.png')
   }
 
   create() {
@@ -49,10 +50,30 @@ class GameScene extends Phaser.Scene {
       repeat: -1,
     })
 
-    this.groupObject = this.physics.add.group()
-    this.groupObject.create(0,0, 'logs').setOrigin(0,0)
-    this.groupObject.create(200, 200, 'logs').setOrigin(0,0)
-    this.groupObject.create(500,500, 'goose')
+    // ? adding new platform by using tileSprite
+    this.platform = this.add.tileSprite(0, 600, 1280, 100, 'platform').setOrigin(0,0)
+
+    this.groupObject = this.physics.add.staticGroup()
+    this.groupObject.create(400,0, 'logs')
+    this.groupObject.create(200, 200, 'logs')
+    this.groupObject.add(this.platform)
+
+    // ? collider
+    // this.physics.add.collider(this.player, this.groupObject)
+
+    // todo How overlap and output ("Hey you hit me")
+    // callback function()
+    // * this.physics.add.overlap(this.player, this.platform, () => {
+    //   // code here...
+
+    // * })
+
+    // ? function callbackHit () {
+    // ? console.log("Hey you hit me.!!!")
+    // ? }
+    // todo How overlap and output ("Hey you hit me")
+    // callback function()
+    // * this.physics.add.overlap(this.player, this.platform, "// callback function here ")
   }
 
   update() {
