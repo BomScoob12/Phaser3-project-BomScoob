@@ -46,6 +46,7 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    console.log('GameScene was started')
     this.addAnimations();
     this.bg = this.add
       .tileSprite(0, 0, 1280, 720, 'bg-pink') // x, y, width, height, key
@@ -98,6 +99,9 @@ class GameScene extends Phaser.Scene {
     // this.player.x += 2
     // this.myCam.startFollow(this.player)
     this.player.anims.play('player-walk', true) // ชื่ออนิเมชั่น,
+
+    // ! Change scene to 'GameScene2'
+    this.scene.start('GameScene2')
   }
 }
 
