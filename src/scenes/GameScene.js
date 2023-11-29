@@ -32,13 +32,7 @@ class GameScene extends Phaser.Scene {
     this.load.image('platform', 'assets/image/game-scene/platforms/ground.png')
   }
 
-  create() {
-    this.bg = this.add
-      .tileSprite(0, 0, 1280, 720, 'bg-pink') // x, y, width, height, key
-      .setOrigin(0, 0) // set origin to // ! top left
-
-    this.player = this.physics.add.sprite(700, 350, 'goose')
-
+  addAnimations(){
     // create animations
     this.anims.create({
       key: 'player-walk', // ชื่ออนิเมชั่น
@@ -49,6 +43,27 @@ class GameScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     })
+  }
+
+  create() {
+    this.addAnimations();
+    this.bg = this.add
+      .tileSprite(0, 0, 1280, 720, 'bg-pink') // x, y, width, height, key
+      .setOrigin(0, 0) // set origin to // ! top left
+
+    // * this.myCam = this.cameras.main
+    // * this.myCam.setBounds(0,0, 1280, 720)
+    // * this.myCam.setZoom(2)
+
+        // // set world bound.
+    // this.player.setCollideWorldBounds(true)
+    // // x, y, Width, Height
+    // this.physics.world.setBounds(0, 0, 1500, 720)
+    // // L R T D
+    // this.physics.world.setBoundsCollision(true, true, true, true)
+
+
+    this.player = this.physics.add.sprite(700, 350, 'goose')
 
     // ? adding new platform by using tileSprite
     this.platform = this.add.tileSprite(0, 600, 1280, 100, 'platform').setOrigin(0,0)
@@ -59,27 +74,29 @@ class GameScene extends Phaser.Scene {
     this.groupObject.add(this.platform)
 
     // ? collider
-    // this.physics.add.collider(this.player, this.groupObject)
+    // * this.physics.add.collider(this.player, this.groupObject)
 
     // todo How overlap and output ("Hey you hit me")
     // callback function()
     // * this.physics.add.overlap(this.player, this.platform, () => {
-    //   // code here...
+    // *  // code here...
 
     // * })
 
-    // ? function callbackHit () {
-    // ? console.log("Hey you hit me.!!!")
-    // ? }
+    // * function callbackHit () {
+    // * console.log("Hey you hit me.!!!")
+    // * }
     // todo How overlap and output ("Hey you hit me")
     // callback function()
     // * this.physics.add.overlap(this.player, this.platform, "// callback function here ")
   }
 
-  update() {
-    // bg.tilePositionY -= 1
-    this.bg.tilePositionX += 1
 
+
+  update() {
+    this.bg.tilePositionX += 1
+    // this.player.x += 2
+    // this.myCam.startFollow(this.player)
     this.player.anims.play('player-walk', true) // ชื่ออนิเมชั่น,
   }
 }
