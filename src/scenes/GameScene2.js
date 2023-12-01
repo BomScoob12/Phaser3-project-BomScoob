@@ -102,6 +102,7 @@ class GameScene2 extends Phaser.Scene {
   }
 
   update() {
+    this.scene.start('GameScene3')
     this.bg.tilePositionX += 1
     this.player.x += 2
     this.myCam.startFollow(this.player)
