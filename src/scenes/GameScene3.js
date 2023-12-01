@@ -48,8 +48,8 @@ class GameScene3 extends Phaser.Scene {
 
     this.coins = this.physics.add.group({
       key: 'key',
-      repeat: 5,
-      setXY: { x: 12, y: 0, stepX: 250 },
+      repeat: 4,
+      setXY: { x: 12, y: 0, stepX: 280 },
     })
     this.coins.children.iterate(function (child) {
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8))
@@ -61,7 +61,7 @@ class GameScene3 extends Phaser.Scene {
     this.events.on(
       'coinCollected',
       function (numCoins) {
-        console.log(`Total coins collected: ' + ${this.score += numCoins}`)
+        console.log(`Total coins collected: ' + ${(this.score += numCoins)}`)
         // * Perform other actions based on the number of coins collected
       },
       this
@@ -72,6 +72,17 @@ class GameScene3 extends Phaser.Scene {
       this.coins,
       this.collectCoin,
       null,
+      this
+    )
+
+    this.events.on(
+      'endGame',
+      function () {
+        console.log('end game')
+        this.score = 0
+        this.scene.start('GameScene3')
+        this.events.off('coinCollected')
+      },
       this
     )
   }
@@ -95,6 +106,9 @@ class GameScene3 extends Phaser.Scene {
 
   update() {
     this.playerMove()
+    if (this.score === 6) {
+      this.events.emit('endGame')
+    }
   }
 }
 
